@@ -1,41 +1,57 @@
 var SCENE = {
     init: function(){
-        SCENE.scene.background = new THREE.Color("#FFFFFF");
+        SCENE.scene.background = new THREE.Color("#000000");
         SCENE.renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( SCENE.renderer.domElement );
 
-        for(var i = -10; i < 10; i++){
+        for(var i = 1; i < 10; i++){
             var cube = new THREE.Mesh( SCENE.geometry, SCENE.material );
-            cube.position.set(1 * i, 0, 0);
+            cube.position.set(2 * i, 0, 0);
+            SCENE.cubes.add( cube );
+        }
+        for(var i = 1; i < 10; i++){
+            var cube = new THREE.Mesh( SCENE.geometry, SCENE.material );
+            cube.position.set(2 * i, 0, 20);
+            SCENE.cubes.add( cube );
+        }
+        for(var i = -10; i < 0; i++){
+            var cube = new THREE.Mesh( SCENE.geometry, SCENE.material );
+            cube.position.set(0, 0, -2 * i);
+            SCENE.cubes.add( cube );
+        }
+        for(var i = -10; i < 0; i++){
+            var cube = new THREE.Mesh( SCENE.geometry, SCENE.material );
+            cube.position.set(20, 0, -2 * i);
             SCENE.cubes.add( cube );
         }
         SCENE.scene.add( SCENE.cubes );
-        SCENE.floor.position.y = -1;
-        SCENE.floor.rotation.x = Math.PI / 2;
-        SCENE.scene.add(SCENE.floor);
 
-        SCENE.ceiling.position.y = 1;
-        SCENE.ceiling.rotation.x = Math.PI / 2;
-        SCENE.scene.add(SCENE.ceiling);
-
+        SCENE.camera.position.x = 6;
         SCENE.camera.position.z = 5;
 
         SCENE.camera.rotation.order = 'YXZ';
+        var directionalLight = new THREE.DirectionalLight( 0xffffff, 2 );
+        directionalLight.position.set( -10, 30, 20 );
+        SCENE.scene.add( directionalLight );
+
+        var directionalLight1 = new THREE.DirectionalLight( 0xffffff, 2 );
+        directionalLight1.position.set( 10, 30, -20 );
+        SCENE.scene.add( directionalLight1 );
     },
     scene: new THREE.Scene(),
     camera: new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ),
     renderer: new THREE.WebGLRenderer(),
 
 
-    geometry: new THREE.BoxGeometry( 1, 1, 1 ),
-    material:  new THREE.MeshBasicMaterial( { color: '#2194CE',
+    geometry: new THREE.BoxGeometry( 2, 4, 2 ),
+    material:  new THREE.MeshStandardMaterial( { color: '#2194CE',
                                               wireframe: false} ),
     cubes: new THREE.Object3D(),
 
 
     floorMaterial: new THREE.MeshBasicMaterial( {
         side: THREE.DoubleSide,
-        color: "#000000"
+        color: "#FFFFFF"
     } ),
     floorGeometry: new THREE.PlaneGeometry(1000, 1000, 10, 10),
     floor: new THREE.Mesh(this.floorGeometry, this.floorMaterial),
@@ -59,4 +75,4 @@ var SCENE = {
         SCENE.renderer.render( SCENE.scene, SCENE.camera )
     }
 
-}
+};

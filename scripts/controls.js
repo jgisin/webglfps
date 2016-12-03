@@ -106,20 +106,20 @@ var CONTROLS = {
     mouseMove: function(){
         $(document).mousemove(function(e){
             if(e.pageX > CONTROLS.mouseX){
-                CONTROLS.lookX = -0.1;
+                CONTROLS.lookX = -0.05;
             }
             else if(e.pageX < CONTROLS.mouseX){
-                CONTROLS.lookX = 0.1;
+                CONTROLS.lookX = 0.05;
             }
             else{
                 CONTROLS.lookX = 0;
             }
 
             if(e.pageY > CONTROLS.mouseY && SCENE.camera.rotation.x > -1){
-                CONTROLS.lookY = -0.1;
+                CONTROLS.lookY = -0.05;
             }
             else if(e.pageY < CONTROLS.mouseY && SCENE.camera.rotation.x < 1){
-                CONTROLS.lookY = 0.1;
+                CONTROLS.lookY = 0.05;
             }
             else{
                 CONTROLS.lookY = 0;
